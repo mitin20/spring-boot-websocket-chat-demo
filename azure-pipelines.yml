@@ -44,3 +44,18 @@ stages:
     #   az pipelines variable-group variable update --group-id 10 --name WEBSOCKET_CHAT_DEMO_VERSION --value $env:PROJECT_VERSION --org https://dev.azure.com/mitin18 --project “mitin18”
       
     #   displayName: 'Set Global Version'
+
+
+- stage: PushArtifactst
+  displayName: Push Pipeline Artifacts
+  jobs:
+  - job: PushArtifacts
+    displayName: Push Pipeline Artifacts
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - task: PublishBuildArtifacts@1
+      displayName: 'Save charts Folder as Artifact'
+      inputs:
+        PathtoPublish: charts
+        ArtifactName: charts
