@@ -30,28 +30,14 @@ stages:
     #   inputs:
     #     script: |
     #       docker images
-
-
-    inputs:
-      mavenPomFile: 'pom.xml'
-      goals: 'help:evaluate'
-      options: '-Dexpression=project.version'
-      publishJUnitResults: false
-      javaHomeOption: 'JDKVersion'
-      mavenVersionOption: 'Default'
-      mavenAuthenticateFeed: false
-      effectivePomSkip: false
-      sonarQubeRunAnalysis: false -q -DforceStdout)
-
-
-    # - task: CmdLine@2
-    #   displayName: Get Project Ver.
-    #   inputs:
-    #     - script: |
-    #       cd $(Build.SourcesDirectory)/
-    #       v=$(mvn help:evaluate - task: Maven@3
-    #       echo $v
-    #       echo "##vso[task.setvariable variable=PROJECT_VERSION;]$v"
+    - task: CmdLine@2
+      displayName: Get Project Ver.
+      inputs:
+        script: |
+          cd $(Build.SourcesDirectory)/
+          v=$(mvn help:evaluate - task: Maven@3
+          echo $v
+          echo "##vso[task.setvariable variable=PROJECT_VERSION;]$v"
 
     # - powershell: |
     #   echo $env:AT | az devops login
