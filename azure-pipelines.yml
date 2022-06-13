@@ -6,7 +6,7 @@ resources:
 
 variables:
   tag: '$(Build.BuildId)'
-  AT: '$(System.AccessToken)'
+  # AT: '$(System.AccessToken)'
 
 stages:
 - stage: Build
