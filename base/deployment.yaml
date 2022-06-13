@@ -18,4 +18,4 @@ spec:
         - name: chat-server-draft
           image: mitin20/chat-server-draft
           ports:
-            - containerPort: chat-server-draft
+            - containerPort: 8080
