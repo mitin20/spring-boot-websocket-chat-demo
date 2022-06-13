@@ -35,7 +35,7 @@ stages:
       inputs:
         script: |
           cd $(Build.SourcesDirectory)/
-          v=$(mvn help:evaluate - task: Maven@3
+          v=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
           echo $v
           echo "##vso[task.setvariable variable=PROJECT_VERSION;]$v"
 
