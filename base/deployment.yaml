@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chat-server-draft
+  labels:
+    app: chat-server-draft
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chat-server-draft
+  template:
+    metadata:
+      labels:
+        app: chat-server-draft
+    spec:
+      containers:
+        - name: chat-server-draft
+          image: chat-server-draft:latest
+          ports:
+            - containerPort: chat-server-draft
