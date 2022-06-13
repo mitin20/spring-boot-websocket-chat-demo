@@ -6,6 +6,7 @@ resources:
 
 variables:
   tag: '$(Build.BuildId)'
+  AT: '$(System.AccessToken)'
 
 stages:
 - stage: Build
@@ -30,20 +31,21 @@ stages:
     #   inputs:
     #     script: |
     #       docker images
-    - task: CmdLine@2
-      displayName: Get Project Ver.
-      inputs:
-        script: |
-          cd $(Build.SourcesDirectory)/
-          v=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
-          echo $v
-          echo "##vso[task.setvariable variable=PROJECT_VERSION;]$v"
 
-    # - powershell: |
-    #   echo $env:AT | az devops login
-    #   az pipelines variable-group variable update --group-id 10 --name WEBSOCKET_CHAT_DEMO_VERSION --value $env:PROJECT_VERSION --org https://dev.azure.com/mitin18 --project “mitin18”
-      
-    #   displayName: 'Set Global Version'
+    # - task: CmdLine@2
+    #   displayName: Get Project Ver.
+    #   inputs:
+    #     script: |
+    #       cd $(Build.SourcesDirectory)/
+    #       v=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+    #       echo $v
+    #       echo "##vso[task.setvariable variable=PROJECT_VERSION;]$v"
+
+    - task: PowerShell@2
+      inputs:
+        targetType: 'inline'
+        script: |
+          echo $env:AT | az devops login
 
 
 - stage: PushArtifactst
