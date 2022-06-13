@@ -52,6 +52,7 @@ stages:
       inputs:
         script: |
           for i in $( docker images | grep $(WEBSOCKET_CHAT_DEMO_VERSION) | awk '{print $1}'); do docker tag $i:$(WEBSOCKET_CHAT_DEMO_VERSION) $(DOCKERHUB_USER)/$i:$(WEBSOCKET_CHAT_DEMO_VERSION); done
+          docker images
           docker login --username $(DOCKERHUB_USER) --password $(DOCKERHUB_TOKEN) 
           docker images | grep $(DOCKERHUB_USER) | cut -f 1 -d ' ' | xargs -L1 docker push
 
