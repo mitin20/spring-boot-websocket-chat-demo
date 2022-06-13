@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: chat-server-draft
-          image: chat-server-draft:latest
+          image: mitin20/chat-server-draft
           ports:
             - containerPort: chat-server-draft
