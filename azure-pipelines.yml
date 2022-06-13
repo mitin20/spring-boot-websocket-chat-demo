@@ -70,7 +70,7 @@ stages:
         script: |
           cd $(Build.SourcesDirectory)/
           cat base/kustomization.yaml
-          sed -i '' 's/latest/popo/g' base/kustomization.yaml
+          sed -i '' -e 's/latest/popo/g' base/kustomization.yaml
           cat base/kustomization.yaml 
 
 # - stage: PushArtifacts
