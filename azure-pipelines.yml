@@ -72,6 +72,14 @@ stages:
           cat base/kustomization.yaml
           sed -i '' -e 's/latest/$(WEBSOCKET_CHAT_DEMO_VERSION)/g' base/kustomization.yaml
           cat base/kustomization.yaml 
+    - task: CmdLine@2
+      displayName: Install kustomize
+      inputs:
+        script: |
+          cd $(Build.SourcesDirectory)/base/
+          curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
+          kustomize version
+          kustomize build > apply.yml
 
 - stage: PushArtifacts
   displayName: Push Pipeline Artifacts
