@@ -16,13 +16,24 @@ stages:
     pool:
       vmImage: ubuntu-latest
     steps:
-    - task: Docker@2
-      displayName: Build an image
+    # - task: Docker@2
+    #   displayName: Build an image
+    #   inputs:
+    #     command: build
+    #     dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
+    #     tags: |
+    #       $(tag)
+    - task: DockerInstaller@0
+      displayName: Docker install
       inputs:
-        command: build
-        dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
-        tags: |
-          chat-server-draft:$(tag)
+        dockerVersion: '17.09.0-ce'
+
+    - task: CmdLine@2
+      displayName: Docker build and tag
+      inputs:
+        script: |
+          docker build -t chat-server-draft:$(tag) .
+
     - task: CmdLine@2
       displayName: Image validation
       inputs:
