@@ -42,10 +42,12 @@ stages:
     #       echo "##vso[task.setvariable variable=PROJECT_VERSION;]$v"
 
     - task: PowerShell@2
+      displayName: 'Get group variable ids'
       inputs:
         targetType: 'inline'
         script: |
           echo $env:AT | az devops login
+          az pipelines variable-group list --group-name Versions |grep id
 
 
 - stage: PushArtifactst
