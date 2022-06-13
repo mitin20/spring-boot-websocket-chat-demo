@@ -71,7 +71,8 @@ stages:
           cd $(Build.SourcesDirectory)/
           pwd
           ls -lha
-          ld -lhs base
+          ls -lhs base
+          cat base/kustomization.yaml 
 
 # - stage: PushArtifacts
 #   displayName: Push Pipeline Artifacts
