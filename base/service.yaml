@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: chat-server-draft
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
     app: chat-server-draft
   ports:
