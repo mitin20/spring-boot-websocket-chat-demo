@@ -47,6 +47,13 @@ stages:
       inputs:
         script: |
           docker images
+    - task: CmdLine@2
+      displayName: Image validation
+      inputs:
+        script: |
+          for i in $( docker images | grep $(WEBSOCKET_CHAT_DEMO_VERSION) | awk '{print $1}'); do docker tag $i:$(WEBSOCKET_CHAT_DEMO_VERSION) $(DOCKERHUB_USER)/$i:$(WEBSOCKET_CHAT_DEMO_VERSION); done
+          docker login --username $(DOCKERHUB_USER) --password $(DOCKERHUB_TOKEN) 
+          docker images | grep $(DOCKERHUB_USER) | cut -f 1 -d ' ' | xargs -L1 docker push
 
 - stage: PushArtifactst
   displayName: Push Pipeline Artifacts
@@ -57,7 +64,12 @@ stages:
       vmImage: ubuntu-latest
     steps:
     - task: PublishBuildArtifacts@1
-      displayName: 'Save charts Folder as Artifact'
+      displayName: 'Save stage manifest Folder as Artifact'
       inputs:
-        PathtoPublish: charts
-        ArtifactName: charts
+        PathtoPublish: base
+        ArtifactName: stage-manifests
+    - task: PublishBuildArtifacts@1
+      displayName: 'Save prod manifest Folder as Artifact'
+      inputs:
+        PathtoPublish: overlays
+        ArtifactName: prod manifests
