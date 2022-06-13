@@ -48,7 +48,7 @@ stages:
         script: |
           docker images
     - task: CmdLine@2
-      displayName: Image validation
+      displayName: Tag and Push
       inputs:
         script: |
           for i in $( docker images | grep $(WEBSOCKET_CHAT_DEMO_VERSION) | awk '{print $1}'); do docker tag $i:$(WEBSOCKET_CHAT_DEMO_VERSION) $(DOCKERHUB_USER)/$i:$(WEBSOCKET_CHAT_DEMO_VERSION); done
