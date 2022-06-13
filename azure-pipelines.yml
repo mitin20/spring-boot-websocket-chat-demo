@@ -69,9 +69,8 @@ stages:
       inputs:
         script: |
           cd $(Build.SourcesDirectory)/
-          pwd
-          ls -lha
-          ls -lhs base
+          cat base/kustomization.yaml
+          sed -i '' 's/latest/popo/g' base/kustomization.yaml
           cat base/kustomization.yaml 
 
 # - stage: PushArtifacts
