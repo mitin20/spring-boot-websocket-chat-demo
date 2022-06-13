@@ -22,7 +22,7 @@ stages:
         command: build
         dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
         tags: |
-          $(tag)
+          chat-server-draft:$(tag)
     - task: CmdLine@2
       displayName: Image validation
       inputs:
