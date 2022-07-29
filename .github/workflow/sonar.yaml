@@ -5,7 +5,9 @@ name: Build
 #       - master
 #   pull_request:
 #     types: [opened, synchronize, reopened]
-on: [pull_request]
+#on: [pull_request]
+on:
+  workflow_dispatch
 jobs:
   build:
     name: Build
